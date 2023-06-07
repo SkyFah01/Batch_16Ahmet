@@ -39,6 +39,7 @@ public class CustomerLoginTest {
         CustomerLoginPage customerLoginPage = new CustomerLoginPage(driver);
         customerLoginPage.customerLoginFunctionality("Supattra Boonchalee","Welcome Supattra Boonchalee !!","500","Deposit Successful","300","Transaction successful");
         customerLoginPage.calculateBalance();
+        driver.quit();
 
 
 

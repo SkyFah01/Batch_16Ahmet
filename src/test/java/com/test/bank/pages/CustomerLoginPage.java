@@ -12,6 +12,7 @@ public class CustomerLoginPage {
 
     public CustomerLoginPage(WebDriver driver){
         PageFactory.initElements(driver , this);
+
     }
     @FindBy(xpath = "//button[.='Customer Login']")
     WebElement customerLoginButton;
@@ -105,6 +106,8 @@ public class CustomerLoginPage {
         String balance = String.valueOf(calculate);
         backButton.click();
         Assert.assertEquals(balance,BrowserUtils.getText(balance200));
+
+
 
     }
 
