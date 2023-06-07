@@ -224,19 +224,19 @@ public class OpenChartTestNGPractice {
           WebElement productNameButton = driver.findElement(By.xpath("//a[contains(text(),'Product Name')]"));
           productNameButton.click();
           List<WebElement> allProductsName=driver.findElements(By.xpath("//td[@class='text-start']"));
-          ArrayList<String> actualDAta = new ArrayList<>();
+          ArrayList<String> actualData = new ArrayList<>();
           ArrayList<String> expectData = new ArrayList<>();
 
           for(int i=1 ; i<allProductsName.size(); i++){
-             actualDAta.add(allProductsName.get(i).getText().toLowerCase().trim());//same order same item
+             actualData.add(allProductsName.get(i).getText().toLowerCase().trim());//same order same item
              expectData.add(allProductsName.get(i).getText().toLowerCase().trim());//same order same item
 
           }
 
           Collections.sort(expectData);
-          System.out.println(actualDAta);
+          System.out.println(actualData);
           System.out.println(expectData);
-          Assert.assertEquals(actualDAta,expectData);
+          Assert.assertEquals(actualData,expectData);
 
 
       }
@@ -299,7 +299,9 @@ public class OpenChartTestNGPractice {
           List<String> names3= Arrays.asList("Ahmet","Ayse","Mehmet","Mahmut");
           System.out.println(names3);//[Ahmet, Ayse, Mehmet, Mahmut]
           Collections.sort(names3);
-          System.out.println(names2);//[Ahmet, Mehmet, Ayse, Mahmut]
+          Collections.sort(names2);
+          System.out.println(names2);
+          System.out.println(names3);//[Ahmet, Ayse, Mahmut, Mehmet]
 
       }
 
