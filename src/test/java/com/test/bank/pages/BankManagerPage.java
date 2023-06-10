@@ -18,9 +18,9 @@ public class BankManagerPage {
         PageFactory.initElements(driver,this);
     }
 
+
     @FindBy(xpath = "//button[contains(text(),'Add Customer')]")
     WebElement addCustomerButton;
-
     @FindBy(xpath = "//input[@placeholder='First Name']")
     WebElement firstName;
 
@@ -54,8 +54,12 @@ public class BankManagerPage {
     @FindBy(xpath = "//td[@class='ng-binding']")
     List<WebElement> allInformation;
 
+    @FindBy(xpath = "//button[.='Home']")
+    WebElement homeButton;
+
     public void addCustomerFunctionality(WebDriver driver,String firstName , String lastName ,String postCode ,String expectedMessage){//provide from test class , make it dynamic
         //provide driver because we need to call method in test class
+
         addCustomerButton.click();
         this.firstName.sendKeys(firstName);
         this.lastName.sendKeys(lastName);
@@ -80,8 +84,6 @@ public class BankManagerPage {
 
 
 
-
-
     }
 
     public void customersButtonFunctionality(String customerName,String lastName , String postCode) throws InterruptedException {
@@ -97,5 +99,8 @@ public class BankManagerPage {
 
     }
 
+    public void clickHomeButton(){
+        homeButton.click();
+    }
 
 }

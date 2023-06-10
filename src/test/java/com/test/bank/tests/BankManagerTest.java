@@ -25,10 +25,10 @@ public class BankManagerTest {
         BankLoginPage bankLoginPage = new BankLoginPage(driver);
         bankLoginPage.clickManagerButton();
 
+
         BankManagerPage bankManagerPage = new BankManagerPage(driver);
         bankManagerPage.addCustomerFunctionality(driver,"Supattra","Boonchalee","45607","Customer added successfully with customer id");
 
-        //bankManagerPage.addCustomerFunctionality("Supattra Boonchalee","Dollar");
 
 
     }

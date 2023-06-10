@@ -14,29 +14,28 @@ public class CustomerLoginPage {
         PageFactory.initElements(driver , this);
 
     }
-    @FindBy(xpath = "//button[.='Customer Login']")
-    WebElement customerLoginButton;
+
 
     @FindBy(xpath = "//select[@id='userSelect']")
     WebElement customerName ;
 
      @FindBy(xpath = "//button[@type='submit']")
-     WebElement loginSubmit;
+     WebElement loginButton;
 
-     @FindBy(xpath = "//div//strong[contains(text(),'Welcome')] ")
+     @FindBy(xpath = "//strong[contains(text(),'Welcome')] ")
      WebElement header;
 
      @FindBy(xpath = "//button[@ng-class='btnClass2']")
-     WebElement clickDeposit;
+     WebElement depositButton;
 
      @FindBy (xpath = "//input[@placeholder='amount']")
      WebElement amountDeposit;
 
      @FindBy(xpath = "//button[@type='submit']")
-     WebElement depositSubmit;
+     WebElement submitDepositButton;
 
      @FindBy(xpath = "//span[contains(text(),'Deposit Successful')]")
-     WebElement depositSuccessful;
+     WebElement successMessage;
 
      @FindBy(xpath = "//button[contains(text(),'Withdraw')]")
      WebElement withdrawButton;
@@ -45,71 +44,71 @@ public class CustomerLoginPage {
      WebElement withdrawAmount;
 
      @FindBy(xpath = "//button[@type='submit']")
-     WebElement withdrawSubmit;
+     WebElement submitWithdrawButton;
+
+    @FindBy (xpath = "//div[@ng-hide='noAccount']//strong[2]")
+    WebElement balance;
 
      @FindBy(xpath = "//span[contains(text(),'Transaction')]")
      WebElement transactionSuccessful;
 
-     @FindBy(xpath = "//button[contains(text(),'Transactions')]")
-     WebElement transactionButton;
+    @FindBy(xpath = "//button[contains(text(),'Transactions')]")
+    WebElement transactionButton;
 
-     @FindBy(xpath = "//tr//td[contains(text(),'500')]")
-     WebElement credit;
+     @FindBy(xpath = "//tr[@id='anchor0']//td[2]")
+     WebElement depositCredit;
 
-     @FindBy(xpath = "//tr//td[contains(text(),'300')]")
-     WebElement debit;
-
-     @FindBy (xpath = "//strong[contains(text(),'200')]")
-     WebElement balance200 ;
-
-     @FindBy(xpath = "//button[.='Back']")
-     WebElement backButton;
+     @FindBy(xpath = "//tr[@id='anchor1']//td[2]")
+     WebElement withDrawDebit;
 
 
 
-
-
-
-    public void customerLoginFunctionality(String name,String expectedHeader ,String depositAmount ,String expectedMessage ,String withdraw ,String expectedTransactionMessage ) throws InterruptedException {
-        //
-     customerLoginButton.click();
-     Thread.sleep(2000);
+    public void loginFunctionality(String name ,String expectedHeader ) throws InterruptedException {
         BrowserUtils.selectBy(customerName,name,"text");
-        loginSubmit.submit();
         Thread.sleep(2000);
+        loginButton.click();
         Assert.assertEquals(BrowserUtils.getText(header),expectedHeader);
-        clickDeposit.click();
-        Thread.sleep(2000);
-        amountDeposit.sendKeys(depositAmount);
-        depositSubmit.submit();
-        Thread.sleep(2000);
+    }
 
-        Assert.assertEquals(BrowserUtils.getText(depositSuccessful),expectedMessage);
-        withdrawButton.click();
-        Thread.sleep(2000);
-        withdrawAmount.sendKeys(withdraw);
-        Thread.sleep(2000);
-        withdrawSubmit.submit();
-        Thread.sleep(2000);
 
-        Assert.assertEquals(BrowserUtils.getText(transactionSuccessful),expectedTransactionMessage);
+     public void depositFunctionality( String depositAmount , String expectedMessage) throws InterruptedException {
+         depositButton.click();
+         Thread.sleep(2000);
+         amountDeposit.sendKeys(depositAmount);
+         submitDepositButton.submit();
+         Thread.sleep(2000);
+         Assert.assertEquals(BrowserUtils.getText(successMessage),expectedMessage);
+     }
+
+     public void withDrawFunctionality(String withDrawAmount ,String expectedWithdrawMessage) throws InterruptedException {
+         withdrawButton.click();
+         Thread.sleep(2000);
+         withdrawAmount.sendKeys(withDrawAmount);
+         Thread.sleep(2000);
+         submitWithdrawButton.submit();
+         Thread.sleep(2000);
+         Assert.assertEquals(BrowserUtils.getText(transactionSuccessful),expectedWithdrawMessage);
+     }
+
+    public void transactionFunctionality() throws InterruptedException {
+
+        int actualBalance = Integer.parseInt(BrowserUtils.getText(balance));
         Thread.sleep(2000);
         transactionButton.click();
         Thread.sleep(2000);
+        int expectedBalance =(Integer.parseInt(BrowserUtils.getText(depositCredit))-Integer.parseInt(BrowserUtils.getText(withDrawDebit)));
+        Assert.assertEquals(actualBalance,expectedBalance);
 
 
 
     }
 
-    public void calculateBalance(){
-        int calculate= (Integer.parseInt(credit.getText().trim())-(Integer.parseInt(debit.getText().trim())));
-        String balance = String.valueOf(calculate);
-        backButton.click();
-        Assert.assertEquals(balance,BrowserUtils.getText(balance200));
 
 
 
-    }
+
+
+
 
 
 

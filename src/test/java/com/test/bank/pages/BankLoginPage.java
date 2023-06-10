@@ -19,11 +19,12 @@ public class BankLoginPage {
     @FindBy(xpath = "//button[.='Customer Login']")
     WebElement customerLogin;
 
-    @FindBy(xpath = "//button[contains(text(),'Bank ')]")
+    @FindBy(xpath = "//button[contains(text(),'Manager Login')]")
     WebElement ManagerLogin;
 
-    @FindBy(xpath = "//button[.='Home']")
-    WebElement homeButton;
+    @FindBy(xpath = "//button[.='Customer Login']")
+    WebElement customerLoginButton;
+
 
     public void LoginPageComponentsValidation(String expectedHeader){//call from test class
         Assert.assertEquals(BrowserUtils.getText(header),expectedHeader);//make it dynamic
@@ -31,8 +32,7 @@ public class BankLoginPage {
         Assert.assertTrue(ManagerLogin.isDisplayed() && ManagerLogin.isEnabled());
 
 
-        //Do not provide hard coding  >> providing value under methods
-        //Assert.assertEquals(BrowserUtils.getText(header),"XYZ Bank");DO nOT
+
     }
 
     public void clickManagerButton(){
@@ -41,9 +41,9 @@ public class BankLoginPage {
     }
 
     public void clickCustomerButton(){
-
-        homeButton.click();
+        customerLoginButton.click();
     }
+
 
 
 }
